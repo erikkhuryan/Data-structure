@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ինչպես է համակարգիչը հասկանում տեքստն ու հիշողությունը</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Animated Shapes -->
+  <div class="bg-blur bg-blur-1"></div>
+  <div class="bg-blur bg-blur-2"></div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="badge">Computer Architecture & Memory Guide</div>
+      <h1>Ինչպես է համակարգիչը հասկանում <span class="gradient-text">Տեքստը</span> և <span class="gradient-text">Հիշողությունը</span></h1>
+      <p class="subtitle">
+        Սիմվոլներից, բացատներից (space) ու նոր տողերից մինչև RAM-ում փոփոխականների զբաղեցրած տեղը։
+      </p>
+    </header>
+
+    <!-- Section 1: Binary Fundamentals -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-num">01</div>
+        <h2>Ամեն ինչի հիմքը․ Երկուական համակարգ (0 և 1)</h2>
+      </div>
+      <p>
+        Համակարգչի պրոցեսորը (CPU) և հիշողությունը (RAM) կազմված են միլիարդավոր փոքրիկ էլեկտրոնային անջատիչներից՝ <strong>տրանզիստորներից</strong>։ Դրանք կարող են լինել միայն 2 վիճակում.
+      </p>
+      
+      <div class="bit-demo-grid">
+        <div class="bit-card off">
+          <div class="bit-status">Անջատված է</div>
+          <div class="bit-value">0</div>
+          <div class="bit-desc">Էլեկտրական լարում չկա (0 Volts)</div>
+        </div>
+        <div class="bit-card on">
+          <div class="bit-status">Միացված է</div>
+          <div class="bit-value">1</div>
+          <div class="bit-desc">Էլեկտրական լարում կա (+3.3V / +1.2V)</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <ul>
+          <li><strong>1 Bit (Բիթ):</strong> Ամենափոքր ինֆորմացիոն միավորն է (ընդունում է 0 կամ 1 արժեքը)։</li>
+          <li><strong>1 Byte (Բայթ) = 8 Bit:</strong> 1 բայթով կարելի է կոդավորել <strong>2<sup>8</sup> = 256</strong> տարբեր արժեքներ (0-ից մինչև 255):</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 2: Text & Encoding Interactive Tool -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-num">02</div>
+        <h2>Տեքստ, Սիմվոլներ, ASCII և Unicode (UTF-8)</h2>
+      </div>
+      <p>
+        Համակարգիչը տառեր չի հասկանում, նա ճանաչում է միայն թվեր։ Ուստի ամեն մի տառի, սիմվոլի կամ բացատի (space) տրված է կոնկրետ թվային կոդ։
+      </p>
+
+      <!-- Interactive Converter Tool -->
+      <div class="tool-box">
+        <h3>⚡ Ինտերակտիվ Սիմուլյատոր</h3>
+        <p>Գրեք ցանկացած տեքստ (հայերեն, լատինատառ, սիմվոլներ `#&$+*`, space կամ enter) և տեսեք, թե ինչպես է համակարգիչը դա տեսնում.</p>
+        
+        <div class="input-group">
+          <label for="textInput">Մուտքագրեք տեքստը․</label>
+          <input type="text" id="textInput" value="Arman 15 #$& +" placeholder="Գրեք այստեղ...">
+        </div>
+
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-label">Սիմվոլներ</span>
+            <span class="stat-val" id="charCount">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Ծավալը RAM-ում</span>
+            <span class="stat-val" id="byteCount">0 Bytes</span>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="char-table">
+            <thead>
+              <tr>
+                <th>Սիմվոլ</th>
+                <th>Անվանում / Տեսակ</th>
+                <th>Dec (Թիվ)</th>
+                <th>Hex (16-ական)</th>
+                <th>Binary (2-ական)</th>
+                <th>Ծավալ</th>
+              </tr>
+            </thead>
+            <tbody id="charTableBody">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Special Characters, Spaces, Newlines -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-num">03</div>
+        <h2>Ինչպես է հասկանում Սիմվոլները, Space-ը և Newline-ը</h2>
+      </div>
+
+      <div class="details-grid">
+        <div class="detail-card">
+          <h4># & $ + _ ( ) @ * : " ' ? ! /</h4>
+          <p>
+            Այս բոլոր հատուկ սիմվոլները ASCII աղյուսակի ստանդարտ մաս են կազմում։ Համակարգչի համար սրանք սովորական 1 բայթանոց թվային կոդեր են (օրինակ՝ <code class="code-inline">#</code>-ը 35 է, <code class="code-inline">@</code>-ը 64 է)։
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h4>Պրաբել ( Space )</h4>
+          <p>
+            Բացատը համակարգչի համար "դատարկություն" չէ, այլ <strong>իրական սիմվոլ</strong>։ ASCII-ում դրա կոդն է <strong>32</strong> (երկուական՝ <code class="code-inline">00100000</code>)։ Այն զբաղեցնում է ճիշտ այնքան տեղ, որքան օրինակ 'A' տառը։
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h4>Նոր տող գնալը ( Enter )</h4>
+          <p>
+            Երբ սեղմում եք Enter, ֆայլի մեջ ավելանում է անտեսանելի կառավարող սիմվոլ․
+          </p>
+          <ul>
+            <li><strong>Linux / macOS:</strong> <code class="code-inline">\n</code> (Line Feed - 10, 1 Byte)</li>
+            <li><strong>Windows:</strong> <code class="code-inline">\r\n</code> (Carriage Return + Line Feed - 13 ու 10, 2 Bytes)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Variable Memory Allocation -->
+    <section class="card">
+      <div class="card-header">
+        <div class="step-num">04</div>
+        <h2>Ինչքա՞ն տեղ է գրավում Փոփոխականը RAM-ում</h2>
+      </div>
+      <p>
+        Երբ ծրագրում ստեղծում եք փոփոխական, համակարգիչը օպերատիվ հիշողության (RAM) մեջ հատկացնում է հստակ չափի հասցեավորված բջիջներ։
+      </p>
+
+      <!-- RAM Simulator -->
+      <div class="ram-visualizer">
+        <h3>🧠 RAM Հիշողության Մոդելավորում</h3>
+        <p class="ram-subtitle">Սեղմեք տվյալների տեսակների վրա՝ տեսնելու համար, թե ինչպես են դրանք տեղաբաշխվում RAM-ում.</p>
+
+        <div class="type-buttons">
+          <button class="btn active" data-type="bool">Boolean (true/false)</button>
+          <button class="btn" data-type="int">Integer (թիվ 42)</button>
+          <button class="btn" data-type="double">Double (տասնորդական 3.14)</button>
+          <button class="btn" data-type="char">Char ('A')</button>
+          <button class="btn" data-type="str-en">String ("Hi")</button>
+          <button class="btn" data-type="str-hy">String ("Հայ")</button>
+        </div>
+
+        <div class="ram-grid" id="ramGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="ram-info" id="ramInfo">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Data Types Table -->
+      <div class="table-wrapper" style="margin-top: 1.5rem;">
+        <table class="char-table">
+          <thead>
+            <tr>
+              <th>Տվյալի Տեսակ</th>
+              <th>Ծավալը RAM-ում</th>
+              <th>Նկարագրություն / Արժեքների միջակայք</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong class="text-accent">Boolean</strong></td>
+              <td>1 Byte (8 bits)</td>
+              <td>Պահում է <code class="code-inline">true</code> (1) կամ <code class="code-inline">false</code> (0)։ (Տեսականորեն 1 բիթ է, բայց RAM-ում հասցեավորման նվազագույն չափը 1 բայթն է)։</td>
+            </tr>
+            <tr>
+              <td><strong class="text-accent">Integer (32-bit)</strong></td>
+              <td>4 Bytes (32 bits)</td>
+              <td>Ամբողջ թվեր -2,147,483,648-ից մինչև +2,147,483,647:</td>
+            </tr>
+            <tr>
+              <td><strong class="text-accent">Float / Double</strong></td>
+              <td>4 - 8 Bytes</td>
+              <td>Կոտորակային/կետով թվեր (օրինակ՝ 3.14159) IEEE 754 ստանդարտով։</td>
+            </tr>
+            <tr>
+              <td><strong class="text-accent">Char (ASCII)</strong></td>
+              <td>1 Byte</td>
+              <td>Մեկ անգլերեն տառ, թիվ կամ սիմվոլ։</td>
+            </tr>
+            <tr>
+              <td><strong class="text-accent">Char (Unicode / UTF-16)</strong></td>
+              <td>2 Bytes</td>
+              <td>Մեկ հայերեն, ռուսերեն կամ այլ լեզվի տառ։</td>
+            </tr>
+            <tr>
+              <td><strong class="text-accent">String (Տեքստ)</strong></td>
+              <td>Տառերի քանակ × Չափ + Overhead</td>
+              <td>
+                Դինամիկ հիշողություն (Heap): Անգլերեն սիմվոլը 1 բայթ, հայերեն տառը UTF-8-ում 2 բայթ + ցուցիչ (pointer) և տեքստի երկարության ինֆորմացիա (8-16 բայթ):
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© Computer Memory Architecture Interactive Guide</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

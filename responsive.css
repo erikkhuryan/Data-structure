@@ -1,0 +1,214 @@
+/* ===================================================
+   FIX HORIZONTAL OVERFLOW & MOBILE LAYOUT
+   =================================================== */
+
+/* Prevent horizontally overflowing elements on body */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix background blur circles leaking outside screen */
+.bg-blur {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Base Mobile Styles (320px - 480px) */
+@media screen and (max-width: 480px) {
+  
+  body {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Header Optimization */
+  .header {
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    white-space: normal; /* Fix overflow if text is long */
+  }
+
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  /* Section Cards */
+  .card {
+    padding: 1rem 0.75rem;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .card-header {
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  p, li {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* Bit Demo Cards (0/1 Status) */
+  .bit-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .bit-card {
+    padding: 0.85rem;
+  }
+
+  .bit-value {
+    font-size: 2.2rem;
+  }
+
+  /* Interactive Tool Input & Stats */
+  .tool-box {
+    padding: 0.85rem 0.65rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .input-group label {
+    font-size: 0.8rem;
+  }
+
+  .input-group input {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.75rem;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .stats-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.65rem 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+  }
+
+  .stat-val {
+    font-size: 0.9rem;
+  }
+
+  /* Table Container - Strict horizontal scrolling for table only */
+  .table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    margin-top: 0.85rem;
+  }
+
+  .char-table {
+    width: 100%;
+    min-width: 480px; /* Ensures scroll inside wrapper, not full page */
+    font-size: 0.75rem;
+  }
+
+  .char-table th, 
+  .char-table td {
+    padding: 0.45rem 0.4rem;
+  }
+
+  /* Details Grid */
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .detail-card {
+    padding: 0.85rem;
+  }
+
+  .detail-card h4 {
+    font-size: 0.9rem;
+  }
+
+  /* RAM Visualizer & Buttons */
+  .ram-visualizer {
+    padding: 0.85rem 0.65rem;
+    box-sizing: border-box;
+  }
+
+  .type-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  .btn {
+    min-height: 42px;
+    font-size: 0.78rem;
+    padding: 0.35rem 0.4rem;
+    border-radius: 6px;
+  }
+
+  .ram-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.35rem;
+  }
+
+  .ram-cell {
+    padding: 0.35rem 0.15rem;
+  }
+
+  .ram-addr {
+    font-size: 0.6rem;
+  }
+
+  .ram-val {
+    font-size: 0.7rem;
+  }
+
+  .ram-info {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
